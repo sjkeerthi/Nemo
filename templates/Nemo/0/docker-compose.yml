@@ -1,20 +1,15 @@
-version: '2'
-
 services:
   apache:
     image: 'bitnami/apache:latest'
-    ports:
-      - '80:80'
-      - '443:443'
     labels:
-    io.rancher.container.hostname_override: container_name
-    io.rancher.sidekicks: apache-datavolume
+      io.rancher.container.hostname_override: container_name
+      io.rancher.sidekicks: apache-datavolume
     volumes_from:
-    - apache-datavolume
+      - apache-datavolume
 apache-datavolume:
   net: none
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
   volumes:
-   - 'apache_data:/bitnami/apache'
+    - apache_data:/bitnami/apache
