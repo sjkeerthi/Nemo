@@ -1,15 +1,14 @@
-services:
-  apache:
-    image: 'bitnami/apache:latest'
-    labels:
-      io.rancher.container.hostname_override: container_name
-      io.rancher.sidekicks: apache-datavolume
-    volumes_from:
-      - apache-datavolume
-apache-datavolume:
-  net: none
+Nemo:
+  tty: true
+  image: bitnami/apache:latest
+  stdin_open: true
+  volumes_from:
+  - nemo-data
   labels:
-    io.rancher.container.hostname_override: container_name
-    io.rancher.container.start_once: true
-  volumes:
-    - apache_data:/bitnami/apache
+    io.rancher.sidekicks: nemo-data
+test-data:
+  tty: true
+  command:
+  - cat
+  image: bitnami/apache:latest
+  stdin_open: true
